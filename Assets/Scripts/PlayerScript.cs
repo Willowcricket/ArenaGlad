@@ -6,8 +6,10 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody2D rb2d;
-    private float speed = 1.5f;
+    public float speed = 1.5f;
     private Animator anime;
+
+    public GameObject SwordBlade;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +34,14 @@ public class PlayerScript : MonoBehaviour
         float yMovement = Input.GetAxis("Vertical") * speed;
         rb2d.velocity = new Vector2(rb2d.velocity.x, yMovement) * speed;
 
-        if (Input.GetMouseButtonDown(2))
+        //Setting Attack Animation to Play
+        if (Input.GetMouseButtonDown(0))
         {
-            anime.Play("PlayerAttackNoShield");
+            anime.SetBool("AttackWOShield", true);
         }
         else
         {
-            anime.Play("PlayerIdle");
+            anime.SetBool("AttackWOShield", false);
         }
     }
 
