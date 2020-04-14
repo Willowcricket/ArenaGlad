@@ -55,4 +55,12 @@ public class PlayerScript : MonoBehaviour
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "ClawBox")
+        {
+            Debug.Log("Player was hit");
+        }
+    }
 }

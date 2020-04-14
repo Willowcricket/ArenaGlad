@@ -9,12 +9,15 @@ public class EnemyScript : MonoBehaviour
     public float movementSpeed = 1.25f;
     public float rotatinSpeed = 60;
     public Transform target;
+    private Animator anime;
+    public bool attackMode = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         tf = gameObject.GetComponent<Transform>();
+        anime = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,13 +35,52 @@ public class EnemyScript : MonoBehaviour
         {
             rotateTowards(target);
         }
+
+        if (attackMode == true)
+        {
+            movementSpeed = 0.0f;
+        }
+        else
+        {
+            movementSpeed = 1.25f;
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerSwordBlade")
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "StopBox")
         {
+            attackMode = false;
+            AttackingChecks();
+        }
+    }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "StopBox")
+        {
+            attackMode = true;
+            AttackingChecks();
+        }
+    }
+
+    private void AttackingChecks()
+    {
+        if (attackMode == true)
+        {
+            anime.SetBool("EnemyAttackT", true);
+        }
+        else
+        {
+            anime.SetBool("EnemyAttackT", false);
         }
     }
 
