@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HealthScript : MonoBehaviour
+{
+    public static int HealthValue;
+    Text score;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        score = GetComponent<Text>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        HealthValue = GameManager.instance.playerHealth;
+        score.text = "Health: " + HealthValue + "%  Medkits: " + GameManager.instance.playerMedkits;
+    }
+}

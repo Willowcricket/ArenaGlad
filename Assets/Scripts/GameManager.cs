@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject Player;
+    public int playerHealth = 100;
+    public int playerCoin = 0;
+    public int playerMedkits = 0;
+    public int Enemies = 0;
 
     public void Awake()
     {
@@ -34,6 +38,14 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+        if (playerHealth > 100)
+        {
+            playerHealth--;
+        }
+        if (playerHealth <= 0)
+        {
+            LoadLevel(6);
         }
     }
 

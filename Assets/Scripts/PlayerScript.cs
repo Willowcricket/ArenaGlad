@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb2d;
     public float speed = 1.5f;
     private Animator anime;
+    private SoundManager SoundManager;
 
     public GameObject SwordBlade;
 
@@ -16,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         anime = gameObject.GetComponent<Animator>();
+        SoundManager = GameManager.instance.GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -38,10 +40,20 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             anime.SetBool("AttackWOShield", true);
+            SoundManager.PlaySword();
         }
         else
         {
             anime.SetBool("AttackWOShield", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (GameManager.instance.playerMedkits > 0)
+            {
+                GameManager.instance.playerMedkits--;
+                GameManager.instance.playerHealth = GameManager.instance.playerHealth + 20;
+            }
         }
     }
 
@@ -54,13 +66,5 @@ public class PlayerScript : MonoBehaviour
         mousePos.y = mousePos.y - objectPos.y;
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "ClawBox")
-        {
-            Debug.Log("Player was hit");
-        }
     }
 }

@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour
     {
         tf = gameObject.GetComponent<Transform>();
         anime = gameObject.GetComponent<Animator>();
+        GameManager.instance.Enemies++;
     }
 
     // Update is called once per frame
@@ -82,6 +83,12 @@ public class EnemyScript : MonoBehaviour
         {
             anime.SetBool("EnemyAttackT", false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.playerCoin = GameManager.instance.playerCoin + 5;
+        GameManager.instance.Enemies--;
     }
 
     public void rotateTowards(Transform target)

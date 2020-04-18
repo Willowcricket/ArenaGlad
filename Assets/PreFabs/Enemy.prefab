@@ -101,6 +101,7 @@ MonoBehaviour:
   movementSpeed: 2.75
   rotatinSpeed: 60
   target: {fileID: 0}
+  attackMode: 0
 --- !u!50 &42616224374718474
 Rigidbody2D:
   serializedVersion: 4
@@ -177,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8585851621677580184}
   - component: {fileID: 855359237438207478}
+  - component: {fileID: 1385293339701593767}
   m_Layer: 0
   m_Name: ClawBox
   m_TagString: ClawBox
@@ -224,3 +226,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &1385293339701593767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4330188784020454593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a8a53267ff65c478d5c8c3f91734b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
